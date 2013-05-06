@@ -1,0 +1,84 @@
+=== Topic ===
+
+Github
+
+=== Links ===
+* Github: http://www.github.com
+* Native Windows App: http://github-windows.s3.amazonaws.com/GitHubSetup.exe
+* Github Help: http://help.github.com
+* Some content taken from:  http://git-scm.com/book/en/
+* Tutorial:  http://try.github.com
+
+===Notes===
+==About Git==
+* As opposed to traditional Version Control Systems (VCS) Git takes a snapshot of your project with ever commit.
+** Traditional VCS stores file changes
+** If a file hasn't changed, Git creates a link to the previous identical file instead of another copy of the unchanged file
+* Everything stored locally
+** Git doesn't have to go out to the master VCS server to get info
+** Saves time and bandwidth for large scale repositories
+* Integrity
+** Everything is checksummed before it is stored and referred by that checksum
+** Unable to change a file or have corrupted files without Git knowing
+* The 3 States of Git
+** Committed means that the data is safely stored in your local database
+** Modified means that you have changed the file but have not committed it to your database yet
+**Staged means that you have marked a modified file in its current version to go into your next commit snapshot
+* Three main sections of a Git project
+** Git directory (repository)
+*** The Git directory is where Git stores the metadata and object database for your project. This is the most important part of Git, and it is what is copied when you clone a repository from another computer.
+** Staging area
+*** The staging area is a simple file, generally contained in your Git directory, that stores information about what will go into your next commit. It.s sometimes referred to as the index, but it.s becoming standard to refer to it as the staging area.
+** working directory
+*** The working directory is a single checkout of one version of the project. These files are pulled out of the compressed database in the Git directory and placed on disk for you to use or modify.
+* Basic Git Workflow
+** Checkout / update / Fork the project
+** Modify files in your working directory
+** You stage the files, adding snapshots of them to your staging area
+** You do a commit, which takes the files as they are in the staging area and stores that snapshot permanently to your Git directory
+==Basic Run Down of Git usage==
+** Initialize a local repository: git init
+** Check the status: git status
+** Create a new file in the direcotry
+** Run git status again to see that git sees the new file.
+** Add the new file to git: git add newfile.txt
+*** This adds the file to the staging area
+*** You can add multiple files with wildcards : git add '*.txt' 
+** Run git status again to see that the new file is tracked and needs to be commited
+** Commit the new file : git commit -m "commiting my newfile.txt"
+** Look at what we've done so far: git log
+* Once you have created a remote repository (on github.com) continue:
+* Add a remote repository to your local repo
+** git remote add origin git@github.com:>YourUsername</>YourRepo<.git
+* The push command tells git where to put our commits
+** git push -u origin master
+** master is the main branch of the remote repo
+** Now you should be able to view your repo on the github website
+* To pull down any changes use the pull command
+** git pull origin master
+* Find out if anything has changed
+** git diff HEAD
+** this will show you what has changed since your last pull
+** use git diff --staged to see differences in staged files.
+* Reset files / Unstage files
+** git reset >filename.txt<
+** reset doesn't delete a file
+* Change files back to how they were at the last commit
+** git checkout -- target
+** target is any file you want to revert back to the last time it was committed. 
+=Branching out=
+* Branches are a copy of the code that you can make separate commits to
+* Useful for testing / adding a feature without affecting a working copy of the code
+* Create a new branch
+** git branch new_branch
+* Switch to the new branch
+** git checkout new_branch
+** Make any changes you wish
+* Switch back to the master branch so you can copy / merge changes
+** git checkout master
+* Merge your changes from the new_branch to master
+** git merge new_branch
+* delete the old branch 
+** git brange -d new_branch
+* push everything to the remote repository
+** git push
